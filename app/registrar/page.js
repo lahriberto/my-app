@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 
 export default function registrar() {
 
-    const [nome, setNome] = useState('')
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [error, setError] = useState('')
@@ -17,8 +17,9 @@ export default function registrar() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        console.log('ok')
 
-        if (!nome || !email || !senha) {
+        if (!name || !email || !senha) {
             setError("Preencha todos os campos");
             return;
         }
@@ -46,12 +47,12 @@ export default function registrar() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    nome,
+                    name,
                     email,
                     senha,
                 }),
             })
-
+            
             if (res.ok) {
                 const form = e.target;
                 form.reset();
@@ -77,7 +78,7 @@ export default function registrar() {
                             <form onSubmit={handleSubmit} className=" space-y-4 md:space-y-6" action="#">
                                 <div className='text-left'>
                                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-indigo-700 dark:text-white">Nome</label>
-                                    <input onChange={(e) => setNome(e.target.value)} type="text" name="nome" id="nome" className="bg-indigo-50 border border-indigo-300 text-indigo-700 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-indigo-700 dark:border-indigo-600 dark:placeholder-indigo-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Abdullah Moiz" required="" />
+                                    <input onChange={(e) => setName(e.target.value)} type="text" name="name" id="name" className="bg-indigo-50 border border-indigo-300 text-indigo-700 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-indigo-700 dark:border-indigo-600 dark:placeholder-indigo-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Abdullah Moiz" required="" />
                                 </div>
                                 <div className='text-left'>
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-indigo-700 dark:text-white">Email</label>

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
+import UploadImagem from "../components/uploadImagem/uploadImagem.js"
 
 
 export default function registrar() {
@@ -11,8 +12,7 @@ export default function registrar() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [error, setError] = useState('')
-
-
+    
     const router = useRouter();
 
     const handleSubmit = async (e) => {
@@ -52,7 +52,7 @@ export default function registrar() {
                     senha,
                 }),
             })
-            
+
             if (res.ok) {
                 const form = e.target;
                 form.reset();
@@ -100,6 +100,7 @@ export default function registrar() {
                                     Já tenho uma conta!  <Link href="/" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Entrar</Link>
                                 </p>
                             </form>
+                            <UploadImagem/>
                         </div>
                     </div>
                 </div>

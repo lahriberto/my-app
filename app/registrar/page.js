@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from "next/navigation";
-import UploadImagem from "../components/uploadImagem/uploadImagem.js"
 
 
 export default function registrar() {
@@ -12,7 +11,7 @@ export default function registrar() {
     const [email, setEmail] = useState('')
     const [senha, setSenha] = useState('')
     const [error, setError] = useState('')
-    
+
     const router = useRouter();
 
     const handleSubmit = async (e) => {
@@ -97,10 +96,10 @@ export default function registrar() {
 
                                 <button type="submit" className="w-full text-white bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Criar Conta</button>
                                 <p className="text-sm font-light text-indigo-500 dark:text-indigo-400">
-                                    Já tenho uma conta!  <Link href="/" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Entrar</Link>
+                                    Já tenho uma conta!
+                                    <Link href="/" className="font-medium text-primary-600 hover:underline dark:text-primary-500">Entrar</Link>
                                 </p>
                             </form>
-                            <UploadImagem/>
                         </div>
                     </div>
                 </div>

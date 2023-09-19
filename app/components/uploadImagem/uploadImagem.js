@@ -37,7 +37,7 @@ export default function UploadForm() {
 
             const objectUrl = URL.createObjectURL(file)
             setImage(objectUrl)
-          }, "1000");
+          }, "1000")
 
         } else {
           console.log(res)

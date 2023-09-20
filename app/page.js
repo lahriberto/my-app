@@ -28,7 +28,7 @@ export default function Home() {
         return;
       }
 
-      router.replace("paginaUsuario");
+      router.replace("mainPage");
     } catch (error) {
       console.log(error);
     }

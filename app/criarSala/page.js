@@ -9,7 +9,7 @@ export default function criarSala() {
     const [name, setName] = useState('')
     const [error, setError] = useState('')
 
-    const router = useRouter();
+    const router = useRouter()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -43,7 +43,7 @@ export default function criarSala() {
         } catch (error) {
             console.log('error during registraion')
         }
-
+        router.refresh()
     }
 
     return (

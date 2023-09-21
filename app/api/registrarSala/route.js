@@ -11,7 +11,9 @@ export async function POST(req) {
     try {
         const { name } = await req.json();
         await connectMongoDB()
-        await Salas.create({  name , members: [id]})
+        Salas.create({ name: name, members: {id_user: id}})
+        
+
         return NextResponse.json({ message: "Sala registrada." }, { status: 201 });
 
     } catch (error) {

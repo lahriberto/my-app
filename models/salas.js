@@ -7,7 +7,7 @@ const userSchema = new Schema(
       required: true,
     },
     members: {
-        type: [{type: Schema.Types.ObjectId , ref: 'User'}],
+      id_user: {type: Schema.Types.ObjectId , ref: 'User'},
     },
   },
   { timestamps: true }

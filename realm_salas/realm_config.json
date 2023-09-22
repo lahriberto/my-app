@@ -1,0 +1,8 @@
+{
+    "app_id": "realm_salas-vlxiv",
+    "config_version": 20210101,
+    "name": "realm_salas",
+    "location": "BR-SP",
+    "provider_region": "aws-sa-east-1",
+    "deployment_model": "LOCAL"
+}

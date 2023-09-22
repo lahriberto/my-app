@@ -14,7 +14,7 @@ async function getSalas() {
         return salasUsuario
     } catch (error) {
         console.log(error)
-        return error;
+        return error
     }
 }
 
@@ -25,7 +25,7 @@ export default async function listaSalas() {
             {
                 data.map((item) => {
                     return (
-                        <Link href={"/salas/" + item.name} type="submit" className="w-100px text-white bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+                        <Link href={"/salas/" + item._id} type="submit" className="w-100px text-white bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
                             {item.name}
                         </Link>
                     )

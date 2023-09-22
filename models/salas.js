@@ -6,9 +6,13 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    members: {
+    members: [{
       id_user: {type: Schema.Types.ObjectId , ref: 'User'},
-    },
+    }],
+    mensagem: [{
+      id_user: {type: Schema.Types.ObjectId , ref: 'User'},
+      conteudo: {type: String},
+    }],
   },
   { timestamps: true }
 )

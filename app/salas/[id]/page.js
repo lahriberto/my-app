@@ -7,6 +7,7 @@ export default function Sala({params}) {
 
 const [mensagem, setMensagem] = useState('')
 const [error, setError] = useState('')
+const id_sala = params.id
 
 const handleSubmit = async (e) => {
     e.preventDefault()
@@ -25,7 +26,8 @@ const handleSubmit = async (e) => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                mensagem
+                mensagem,
+                id_sala,
             }),
         })
         console.log(res)

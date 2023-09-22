@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from "next/navigation";
+import React, { useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from "next/navigation"
 
 
 export default function registrar() {
@@ -19,7 +19,7 @@ export default function registrar() {
         console.log('ok')
 
         if (!name || !email || !senha) {
-            setError("Preencha todos os campos");
+            setError("Preencha todos os campos")
             return;
         }
 
@@ -33,11 +33,11 @@ export default function registrar() {
                 body: JSON.stringify({ email }),
             });
 
-            const { user } = await resUsuarioExiste.json();
+            const { user } = await resUsuarioExiste.json()
 
             if (user) {
-                setError("Email já cadastrado!");
-                return;
+                setError("Email já cadastrado!")
+                return
             }
 
             const res = await fetch("api/registrar", {
@@ -53,11 +53,11 @@ export default function registrar() {
             })
 
             if (res.ok) {
-                const form = e.target;
-                form.reset();
-                router.push("/");
+                const form = e.target
+                form.reset()
+                router.push("/")
             } else {
-                console.log("User registration failed.");
+                console.log("User registration failed.")
             }
         } catch (error) {
             console.log('error during registraion')

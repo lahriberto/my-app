@@ -1,47 +1,57 @@
-import mongoose, { Schema, models } from "mongoose"
+const mongoose = require('mongoose');
+const { Schema, models } = mongoose;
+
+const mensagemSchema = new Schema(
+  {
+    conteudo: { type: String, required: true },
+    remetente: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+  },
+  { timestamps: true }
+);
 
 const userSchema = new Schema(
   {
-    name: { type: String, required: true, },
-    members: [{
-      id_user: { type: Schema.Types.ObjectId, ref: 'User' },
-    }],
-    mensagem: [{type: new mongoose.Schema(
+    name: { type: String, required: true },
+    members: [
       {
-        type: Schema.Types.ObjectId, 
-        conteudo: { type: String }, 
+        id_user: { type: Schema.Types.ObjectId, ref: 'User' },
       },
-      { timestamps: true }
-      )
-    }],
-    pendentes: [{
-      type: new mongoose.Schema(
-        {
-          pedidoEm: { type: Date, required: true, },
-          id_user: { type: Schema.Types.ObjectId, ref: 'User' },
-          votosFavor: [{
-            type: new mongoose.Schema(
+    ],
+    mensagens: [mensagemSchema],
+    pendentes: [
+      {
+        type: new mongoose.Schema(
+          {
+            pedidoEm: { type: Date, required: true },
+            id_user: { type: Schema.Types.ObjectId, ref: 'User' },
+            votosFavor: [
               {
-                type: Schema.Types.ObjectId
-              }, 
-              { timestamps: true }
-              )
-          }],
-          votosContra: [{
-            type: new mongoose.Schema(
+                type: new mongoose.Schema(
+                  {
+                    type: Schema.Types.ObjectId,
+                  },
+                  { timestamps: true }
+                ),
+              },
+            ],
+            votosContra: [
               {
-                type: Schema.Types.ObjectId
-              }, 
-              { timestamps: true }
-              )
-          }],
-        },
-        { timestamps: true }
-      )
-    }],
+                type: new mongoose.Schema(
+                  {
+                    type: Schema.Types.ObjectId,
+                  },
+                  { timestamps: true }
+                ),
+              },
+            ],
+          },
+          { timestamps: true }
+        ),
+      },
+    ],
   },
   { timestamps: true }
-)
+);
 
-const Salas = models.Salas || mongoose.model("Salas", userSchema)
-export default Salas
+const Salas = models.Salas || mongoose.model('Salas', userSchema);
+module.exports = Salas;

@@ -5,38 +5,61 @@ import io from 'socket.io-client'
 
 const socket = io()
 
-const SocketComponent = () => {
+const SocketComponent = (props) => {
   const [message, setMessage] = useState('')
   const [messages, setMessages] = useState([])
+
+  socket.emit('join_room', props.id_sala)
 
   useEffect(() => {
     socket.on('message', (message) => {
       // Recebe mensagens do servidor e as adiciona ao estado de mensagens
-
-      setMessages((prevMessages) => [...prevMessages, message]);
-      
-    });
+      setMessages((prevMessages) => [...prevMessages, message])
+    })
 
     return () => {
-        socket.off('message');
-      };
+      socket.off('message')
+    }
+  }, [])
 
-  }, []);
-
-  console.log(messages)
-
+  // Envia a mensagem para o servidor
   const sendMessage = () => {
-    // Envia a mensagem para o servidor
-    socket.emit('message', message);
-    setMessage(''); // Limpa a mensagem após o envio
-  };
+    if (message !== '') {
+      const messageData = {
+        id_sala: props.id_sala,
+        id_user: props.id_user,
+        message: message,
+      }
+      socket.emit('message', messageData)
+    }
+    setMessage('') // Limpa a mensagem após o envio
+  }
+
+  function extrairNomeAbreviado(nomeCompleto) {
+    // Divida a string pelo espaço em branco para obter partes separadas
+    const partesDoNome = nomeCompleto.split(' ');
+  
+    // Verifique se existem pelo menos duas partes (nome e sobrenome)
+    if (partesDoNome.length >= 2) {
+      const nome = partesDoNome[0];
+      const primeiroSobrenome = partesDoNome[1][0]; // Primeira letra do primeiro sobrenome
+  
+      return `${nome} ${primeiroSobrenome}.`;
+    } else {
+      // Se não houver espaço em branco, considere a string inteira como o nome
+      return nomeCompleto;
+    }
+  }
+  
 
   return (
     <div>
-      <h2>Chat</h2>
       <div className="h-96 bg-indigo-100 rounded border border-slate-300">
         {messages.map((msg, index) => (
-          <div className='text-indigo-800 text-left m-2' key={index}>{msg}</div>
+          <div className='text-indigo-800 text-left m-2' key={index}>
+            <p>Usuário: {extrairNomeAbreviado(msg.remetente)}</p>
+            <p>Mensagem: {msg.conteudo}</p>
+          </div>
         ))}
       </div>
       <input
@@ -46,9 +69,9 @@ const SocketComponent = () => {
         value={message}
         onChange={(e) => setMessage(e.target.value)}
       />
-      <button onClick={sendMessage}>Enviar</button>
+      <button onClick={sendMessage}>Enviar Mensagem &rarr;</button>
     </div>
-  );
-};
+  )
+}
 
-export default SocketComponent;
+export default SocketComponent

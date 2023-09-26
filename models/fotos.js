@@ -1,4 +1,5 @@
-import mongoose, { Schema, models } from "mongoose"
+const mongoose = require('mongoose');
+const { Schema, models } = mongoose;
 
 const userSchema = new Schema(
   {
@@ -20,4 +21,4 @@ const userSchema = new Schema(
 )
 
 const Fotos = models.Fotos || mongoose.model("Fotos", userSchema)
-export default Fotos
+module.exports = Fotos;

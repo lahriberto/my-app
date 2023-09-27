@@ -7,14 +7,14 @@ const socket = io()
 
 const SocketComponent = (props) => {
   const [message, setMessage] = useState('')
-  const [messages, setMessages] = useState([])
+  const [oldMessages, setOldMessages] = useState(JSON.parse(props.mensagens))
 
   socket.emit('join_room', props.id_sala)
 
   useEffect(() => {
     socket.on('message', (message) => {
       // Recebe mensagens do servidor e as adiciona ao estado de mensagens
-      setMessages((prevMessages) => [...prevMessages, message])
+      setOldMessages((prevMessages) => [...prevMessages, message])
     })
 
     return () => {
@@ -51,11 +51,10 @@ const SocketComponent = (props) => {
     }
   }
   
-
   return (
     <div>
-      <div className="h-96 bg-indigo-100 rounded border border-slate-300">
-        {messages.map((msg, index) => (
+      <div className="h-96 bg-indigo-100 rounded border border-slate-300 overflow-auto">
+        {oldMessages.map((msg, index) => (
           <div className='text-indigo-800 text-left m-2' key={index}>
             <p>Usuário: {extrairNomeAbreviado(msg.remetente)}</p>
             <p>Mensagem: {msg.conteudo}</p>

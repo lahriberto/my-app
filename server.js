@@ -22,13 +22,13 @@ app.prepare().then(() => {
 
     socket.on('message', async (data) => {
       try {
-        const salaId = data.id_sala // Suponha que você tenha um identificador de sala na mensagem
+        const salaId = data.id_sala
         const mensagemToDB = {
           conteudo: data.message,
-          remetente: data.id_user, // Substitua por uma referência ao remetente
+          remetente: data.id_user,
         }
 
-        // Encontre a sala pelo ID e adicione a mensagem à coleção
+        // Encontra a sala pelo ID e adiciona a mensagem à coleção
         const Salas = require('./models/salas')
         const sala = await Salas.findByIdAndUpdate(
           salaId,

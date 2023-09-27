@@ -44,7 +44,9 @@ export default async function Sala({ params }) {
             name: session?.user?.name,
             fotoPerfil: session?.user?.image,
         },
-        id_sala: data.id,
+        sala: {
+            id: data.id
+        },
         dataMessages: JSON.parse(JSON.stringify(dataM))
     }
 

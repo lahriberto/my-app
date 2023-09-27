@@ -45,8 +45,10 @@ app.prepare().then(() => {
         const usuario = await User.findById(data.id_user);
 
         const mensagemToUsers = {
-          conteudo: data.message,
-          remetente: usuario.name, // Substitua por uma referência ao remetente
+          id: usuario._id,
+          name: usuario.name,
+          path: usuario.fotoPerfil,
+          data: data.message, // Substitua por uma referência ao remetente
         }
   
         // Emita a mensagem para todos os clientes na sala

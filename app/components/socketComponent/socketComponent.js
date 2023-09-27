@@ -8,15 +8,23 @@ const socket = io()
 
 const SocketComponent = (props) => {
   const [message, setMessage] = useState('')
-  const [oldMessages, setOldMessages] = useState(JSON.parse(props.mensagens))
+  const [oldMessages, setOldMessages] = useState(props.dataMessages)
 
   socket.emit('join_room', props.id_sala)
 
   useEffect(() => {
     socket.on('message', (message) => {
       // Recebe mensagens do servidor e as adiciona ao estado de mensagens
-      setOldMessages((prevMessages) => [...prevMessages, message])
+      console.log(message)
+      setOldMessages((prevMessages) => [...prevMessages, {
+        id: message.remetente,
+        name: props.user.name,
+        path: props.user.fotoPerfil,
+        data: message.conteudo
+    }])
     })
+
+    console.log(oldMessages)
 
     return () => {
       socket.off('message')
@@ -28,7 +36,7 @@ const SocketComponent = (props) => {
     if (message !== '') {
       const messageData = {
         id_sala: props.id_sala,
-        id_user: props.id_user,
+        id_user: props.user.id,
         message: message,
       }
       socket.emit('message', messageData)
@@ -41,7 +49,7 @@ const SocketComponent = (props) => {
       <div className="h-96 bg-indigo-100 rounded border border-slate-300 overflow-auto">
         {oldMessages.map((msg, index) => (
           <div className='text-indigo-800 text-left m-2' key={index}>
-            <MessageDetails user_id={msg.remetente} data={msg.conteudo}/>
+            <MessageDetails user_name={msg.name} data={msg.data} fotoPerfil={msg.fotoPerfil}/>
           </div>
         ))}
       </div>

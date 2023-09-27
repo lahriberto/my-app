@@ -2,6 +2,7 @@ import React from 'react'
 import SocketComponent from "../../components/socketComponent/socketComponent"
 import Link from 'next/link'
 import Salas from "../../../models/salas"
+import User from "../../../models/user"
 import { connectMongoDB } from '../../../lib/mongodb'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '../../api/auth/[...nextauth]/route'
@@ -22,10 +23,29 @@ export default async function Sala({ params }) {
 
     const data = await getSalaData()
 
+    const someFunction = (myArray) => {
+        const promises = data.mensagens.map(async (myValue) => {
+            const user = await User.findById(myValue.remetente).exec()
+            return {
+                id: user._id,
+                name: user.name,
+                path: user.fotoPerfil,
+                data: myValue.conteudo
+            }
+        });
+        return Promise.all(promises);
+    }  
+
+    const dataM = await someFunction()
+
     const socketComponentProps = {
-        id_user: session?.user?.id,
+        user: {
+            id: session?.user?.id,
+            name: session?.user?.name,
+            fotoPerfil: session?.user?.image,
+        },
         id_sala: data.id,
-        mensagens: JSON.stringify(data.mensagens), //GAMBIARRA INSOLUCIONÁVEL
+        dataMessages: JSON.parse(JSON.stringify(dataM))
     }
 
     return (

@@ -10,7 +10,7 @@ const SocketComponent = (props) => {
   const [message, setMessage] = useState('')
   const [oldMessages, setOldMessages] = useState(props.dataMessages)
 
-  socket.emit('join_room', props.id_sala)
+  socket.emit('join_room', props.sala.id)
 
   useEffect(() => {
     socket.on('message', (message) => {

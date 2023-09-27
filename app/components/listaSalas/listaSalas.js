@@ -11,7 +11,6 @@ async function getSalas() {
     try {
         await connectMongoDB()
         const salasUsuario = await Salas.find({ 'members.id_user': id }).exec()
-        console.log(salasUsuario)
         return salasUsuario
     } catch (error) {
         console.log(error)

@@ -2,11 +2,11 @@ import React from 'react'
 import { connectMongoDB } from '../../../lib/mongodb'
 import Salas from '../../../models/salas'
 import User from '../../../models/user'
-import YesButton from './buttons/YesButton'
-import NoButton from './buttons/NoButton'
+import VotoButton from './buttons/votoButton/votoButton'
 
-export default async function ListFotos({ id_sala }) {
-  async function getPendentes() {
+export default async function listPendentes({ id_sala }) {
+
+  async function getDataSala() {
     try {
       await connectMongoDB()
       const pendentesData = await Salas.findById(id_sala, 'pendentes')
@@ -17,10 +17,10 @@ export default async function ListFotos({ id_sala }) {
     }
   }
 
-  async function getNomePendentes() {
+  async function getDataUser() {
     try {
       await connectMongoDB()
-      const data = await getPendentes()
+      const data = await getDataSala()
 
       const nomePendentes = await Promise.all(data.map(async (item) => {
         const user = await User.findById(item.id_user)
@@ -37,20 +37,20 @@ export default async function ListFotos({ id_sala }) {
     }
   }
 
-  const nomePendentes = await getNomePendentes()
+  const user = await getDataUser()
+  const sala_Id = id_sala
 
   return (
     <>
       <section className="bg-indigo-700 text-center">
         <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
           <div className="w-full space-y-4 shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-indigo-800 dark:border-indigo-700">
-            {nomePendentes.map((item) => (
+            {user.map((item) => (
               <div className="grid-cols-1 p-6 bg-white rounded-lg space-y-4 md:space-y-6 sm:p-8 relative ">
                 <h1 key={item.id_user} className="text-xl font-bold leading-tight tracking-tight text-indigo-700 md:text-2xl dark:text-white">
                   {item.name}
                   <div>
-                    <YesButton salaId={id_sala} />
-                    <NoButton salaId={id_sala} />
+                    <VotoButton salaId = {sala_Id} userId = {JSON.stringify(item.id_user)}/>
                   </div>
                 </h1>
               </div>

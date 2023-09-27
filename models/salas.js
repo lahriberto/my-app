@@ -24,22 +24,12 @@ const userSchema = new Schema(
           {
             pedidoEm: { type: Date, required: true },
             id_user: { type: Schema.Types.ObjectId, ref: 'User' },
-            votosFavor: [
+            votos: [
               {
-                type: new mongoose.Schema(
-                  {
-                    type: Schema.Types.ObjectId,
-                  },
-                  { timestamps: true }
-                ),
-              },
-            ],
-            votosContra: [
-              {
-                type: new mongoose.Schema(
-                  {
-                    type: Schema.Types.ObjectId,
-                  },
+                type: new mongoose.Schema({
+                  favoravel: { type: Boolean, required: true },
+                  id_user: { type: Schema.Types.ObjectId, ref: 'User' },
+                },
                   { timestamps: true }
                 ),
               },

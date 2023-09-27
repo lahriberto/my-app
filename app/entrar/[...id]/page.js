@@ -3,39 +3,39 @@
 import React, { useState } from 'react'
 import Link from "next/link"
 
-export default function Entrar({params}) {
-const [mensagem, setMensagem] = useState('')
-const id_sala = params.id[0]
+export default function Entrar({ params }) {
+    const [mensagem, setMensagem] = useState('')
+    const id_sala = params.id[0]
 
-const handleSubmit = async (e) => {
-    e.preventDefault()
-    console.log('ok')
+    const handleSubmit = async (e) => {
+        e.preventDefault()
+        console.log('ok')
 
-    try {
+        try {
 
-        const res = await fetch("../api/entrarSala", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                id_sala
-            }),
-        })
+            const res = await fetch("../api/entrarSala", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    id_sala
+                }),
+            })
 
-        if (res.ok) {
-            setMensagem("Solicitação enviada!")
-        } else {
-            console.log("User registration failed.")
+            if (res.ok) {
+                setMensagem("Solicitação enviada!")
+            } else {
+                console.log("User registration failed.")
+            }
+        } catch (error) {
+            console.log('error during registraion')
         }
-    } catch (error) {
-        console.log('error during registraion')
+
     }
 
-}
-
-  return (
-  <>
+    return (
+        <>
             <section className="bg-indigo-700 text-center">
                 <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
                     <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-indigo-800 dark:border-indigo-700">
@@ -51,5 +51,5 @@ const handleSubmit = async (e) => {
                     </div>
                 </div>
             </section>
-  </>)
+        </>)
 }

@@ -35,7 +35,7 @@ const SocketComponent = (props) => {
   const sendMessage = () => {
     if (message !== '') {
       const messageData = {
-        id_sala: props.id_sala,
+        id_sala: props.sala.id,
         id_user: props.user.id,
         message: message,
       }

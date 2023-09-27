@@ -61,7 +61,7 @@ export default async function Sala({ params }) {
                                 <button className='absolute top-0 right-0'>&#10010;</button>
                             </div>
                             <SocketComponent {...socketComponentProps} />
-                            <Link href="/pendentes" type="submit" className="w-100px text-white bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Ver Pendentes</Link>
+                            <Link href={"/pendentes" + '/' + data._id}  type="submit" className="w-100px text-white bg-indigo-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-full text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">Ver Pendentes</Link>
                         </div>
                     </div>
                 </div>

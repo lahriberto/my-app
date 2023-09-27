@@ -2,22 +2,31 @@ import React from 'react'
 import { connectMongoDB } from '../../../lib/mongodb';
 import Salas from '../../../models/salas';
 
-async function getPendentes() {
-  try {
-    await connectMongoDB()
-    const Pendentes = await Salas.find({ 'pendentes': {} }).exec()
-    console.log(Pendentes)
-    return Pendentes
-  } catch (error) {
-    console.log(error)
-    return error;
+export default async function ListFotos({ id_sala }) {
+  async function getPendentes() {
+    try {
+      await connectMongoDB()
+      const pendentes = await Salas.findById(id_sala, 'pendentes')
+      return pendentes
+    } catch (error) {
+      console.log(error)
+      return error
+    }
   }
-}
 
-export default async function ListFotos() {
   const data = await getPendentes()
-  return (<>
-         {data}
-  </>
-  )
+  console.log(await getPendentes())
+  return (
+    <>
+        {
+            data.map((item) => {
+                return (
+                    <div>
+                      {item.id_user}
+                    </div>
+                )
+            })
+        }
+    </>
+)
 }

@@ -18,6 +18,6 @@ export async function POST(req) {
     return NextResponse.json(
       { message: "An error occurred while registering the user." },
       { status: 500 }
-    );
+    )
   }
 }

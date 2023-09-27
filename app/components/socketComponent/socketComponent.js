@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import io from 'socket.io-client'
+import MessageDetails from "../messageDetails/messageDetails"
 
 const socket = io()
 
@@ -34,30 +35,13 @@ const SocketComponent = (props) => {
     }
     setMessage('') // Limpa a mensagem após o envio
   }
-
-  function extrairNomeAbreviado(nomeCompleto) {
-    // Divida a string pelo espaço em branco para obter partes separadas
-    const partesDoNome = nomeCompleto.split(' ');
-  
-    // Verifique se existem pelo menos duas partes (nome e sobrenome)
-    if (partesDoNome.length >= 2) {
-      const nome = partesDoNome[0];
-      const primeiroSobrenome = partesDoNome[1][0]; // Primeira letra do primeiro sobrenome
-  
-      return `${nome} ${primeiroSobrenome}.`;
-    } else {
-      // Se não houver espaço em branco, considere a string inteira como o nome
-      return nomeCompleto;
-    }
-  }
   
   return (
     <div>
       <div className="h-96 bg-indigo-100 rounded border border-slate-300 overflow-auto">
         {oldMessages.map((msg, index) => (
           <div className='text-indigo-800 text-left m-2' key={index}>
-            <p>Usuário: {extrairNomeAbreviado(msg.remetente)}</p>
-            <p>Mensagem: {msg.conteudo}</p>
+            <MessageDetails user_id={msg.remetente} data={msg.conteudo}/>
           </div>
         ))}
       </div>

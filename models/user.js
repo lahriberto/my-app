@@ -15,6 +15,10 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
+    fotoPerfil: {
+      type: String,
+      required: false,
+    },
   },
   { timestamps: true }
 )

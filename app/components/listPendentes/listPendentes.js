@@ -50,7 +50,7 @@ export default async function listPendentes({ id_sala }) {
                 <h1 key={item.id_user} className="text-xl font-bold leading-tight tracking-tight text-indigo-700 md:text-2xl dark:text-white">
                   {item.name}
                   <div>
-                    <VotoButton salaId = {sala_Id} userId = {JSON.stringify(item.id_user)}/>
+                    <VotoButton salaId = {sala_Id} userId = {item.id_user.toString()}/>
                   </div>
                 </h1>
               </div>

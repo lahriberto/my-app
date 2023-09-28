@@ -7,6 +7,7 @@ import { authOptions } from "../auth/[...nextauth]/route"
 export async function POST(req) {
     const session = await getServerSession(authOptions)
     const id_votante = session?.user?.id
+
     try {
         const { id_sala, id_user, voto } = await req.json()
         await connectMongoDB()
@@ -36,16 +37,17 @@ export async function POST(req) {
             throw new Error('Sala não encontrada ou não atualizada');
         }
 
-        //criar uma function que verifica se o candidato pendente atingiu o quórum necessário para entrar na sala
-        //chamar função aqui 
-
         console.log('Dados inseridos com sucesso.')
 
-        return NextResponse.json({ message: "Voto registrado." }, { status: 201 })
+        return NextResponse.json(
+            { message: "Voto registrado." },
+            { status: 201 }
+        )
+
     } catch (error) {
         return NextResponse.json(
             { message: "Ocorreu um erro ao registrar o voto." },
             { status: 500 }
-        )
-    }
+        )}
+
 }

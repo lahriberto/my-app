@@ -1,12 +1,12 @@
 'use client'
 
-import React from 'react';
+import React from 'react'
 
 export default function yesButton({ salaId, userId }) {
 
   const handleSubmit = async (e, voto) => {
-    e.preventDefault();
-    console.log('ok');
+    e.preventDefault()
+    console.log('ok')
 
     try {
       const res = await fetch("../api/registrarVotos", {
@@ -22,13 +22,13 @@ export default function yesButton({ salaId, userId }) {
       })
 
       if (res.ok) {
-        console.log('Voto computado');
+        console.log('Voto computado')
         // Faça qualquer outra ação que você deseja quando o voto é bem-sucedido.
       } else {
-        console.log("Votação falhou");
+        console.log("Votação falhou")
       }
     } catch (error) {
-      console.log('error during registration');
+      console.log('error during registration')
     }
   };
 
@@ -37,5 +37,5 @@ export default function yesButton({ salaId, userId }) {
       <button onClick={(e) => handleSubmit(e, true)}>Sim</button>
       <button onClick={(e) => handleSubmit(e, false)}>Não</button>
     </>
-  );
+  )
 }

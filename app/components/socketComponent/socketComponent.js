@@ -67,7 +67,7 @@ const SocketComponent = (props) => {
       <div
         ref={messagesContainerRef}
         name="ListaDeMensagens"
-        className="h-96 bg-indigo-100 rounded border border-slate-300 overflow-hidden"
+        className="h-96 bg-indigo-100 rounded border border-slate-300 overflow-auto"
       >
         {oldMessages.map((msg, index) => (
           <div className="text-indigo-800 text-left m-2" key={index}>
